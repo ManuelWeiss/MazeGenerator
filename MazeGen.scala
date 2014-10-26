@@ -48,8 +48,6 @@ object MazeGen {
         
         val maze = Maze(Array.tabulate(size, size)((_,_) => true))
 
-		val r = new Random
-
 	    def doubleStep(p: Pos, f: Pos => Pos): Boolean = {
     		if (maze(f(p)) && maze(f(f(p)))) {
     			maze(f(p)) = false
@@ -68,10 +66,8 @@ object MazeGen {
 	    	}
 	    }
 	
-		val s = r.nextInt(size - 2) + 1
-		val sOdd = if (s % 2 == 0) s + 1 else s	// makes a nicer looking maze
-		val start = (sOdd, 1)
-		val exit  = (r.nextInt(size - 2) + 1, size - 1)
+		val start = (1, 1)
+		val exit  = (size - 2, size - 1)
 		maze(start) = false
 		maze(down(start)) = false // mark "entrance"
 		maze(exit) = false        // mark "exit"
